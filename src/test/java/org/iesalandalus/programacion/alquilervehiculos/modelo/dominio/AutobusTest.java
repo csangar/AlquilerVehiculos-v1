@@ -130,7 +130,7 @@ public class AutobusTest {
 	
 	@Test
 	void toStringDevuelveLaCadenaEsperada() {
-		assertEquals(String.format("%s %s (%d plazas) - %s", MARCA_VALIDA, MODELO_VALIDO, PLAZAS_VALIDAS, MATRICULA_VALIDA), autobus.toString());
+		assertEquals(String.format("%s %s (%s plazas) - %s", MARCA_VALIDA, MODELO_VALIDO, PLAZAS_VALIDAS, MATRICULA_VALIDA), autobus.toString());
 	}
 
 }
