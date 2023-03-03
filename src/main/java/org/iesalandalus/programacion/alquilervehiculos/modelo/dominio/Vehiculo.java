@@ -10,26 +10,32 @@ public abstract class Vehiculo {
 	private String modelo;
 	private String matricula;
 
-	public Vehiculo(String marca, String modelo, String matricula) {
+	protected Vehiculo(String marca, String modelo, String matricula) {
 		setMarca(marca);
 		setModelo(modelo);
 		setMatricula(matricula);
 	}
 	
-	public Vehiculo(Vehiculo vehiculo) {
+	protected Vehiculo(Vehiculo vehiculo) {
 		if (vehiculo == null) {
 			throw new NullPointerException("ERROR: No es posible copiar un vehículo nulo.");
 		}
-		setMarca(vehiculo.marca);
-		setMatricula(vehiculo.matricula);
-		setModelo(vehiculo.modelo);
+		this.marca = vehiculo.getMarca();
+		this.matricula= vehiculo.getMatricula();
+		this.modelo =vehiculo.getModelo();
 	}
 
 	public static Vehiculo copiar(Vehiculo vehiculo) {
 		Vehiculo vehiculoCopiado = null;
 		if(vehiculo instanceof Turismo turismo) {
 			vehiculoCopiado = new Turismo(turismo);
-		}/*Hacer lo mismo con autobus y furgoneta cuanso esten las clases creadas*/
+		}
+		if(vehiculo instanceof Autobus autobus) {
+			vehiculoCopiado = new Autobus(autobus);
+		}
+		if(vehiculo instanceof Furgoneta furgoneta) {
+			vehiculoCopiado = new Furgoneta(furgoneta);
+		}
 		return vehiculoCopiado;
 	}
 	public static Vehiculo getVehiculoConMatricula(String matricula) {
