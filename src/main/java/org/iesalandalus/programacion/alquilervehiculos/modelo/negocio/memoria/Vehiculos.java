@@ -26,10 +26,10 @@ public class Vehiculos implements IVehiculos {
 	}
 	public void insertar(Vehiculo turismo) throws OperationNotSupportedException {
 		if(turismo == null) {
-			throw new NullPointerException("ERROR: No se puede insertar un turismo nulo.");
+			throw new NullPointerException("ERROR: No se puede insertar un vehículo nulo.");
 		}
 		if(coleccionVehiculos.contains(turismo)) {
-			throw new OperationNotSupportedException("ERROR: Ya existe un turismo con esa matrícula.");
+			throw new OperationNotSupportedException("ERROR: Ya existe un vehículo con esa matrícula.");
 		}
 		if (turismo != null)
 			coleccionVehiculos.add(turismo);
@@ -37,7 +37,7 @@ public class Vehiculos implements IVehiculos {
 	@Override
 	public Vehiculo buscar(Vehiculo turismo) {
 		if (turismo == null) {
-			throw new NullPointerException("ERROR: No se puede buscar un turismo nulo.");
+			throw new NullPointerException("ERROR: No se puede buscar un vehículo nulo.");
 		}
 		if (coleccionVehiculos.contains(turismo)) {
 			int nuevoT = coleccionVehiculos.indexOf(turismo);
@@ -48,10 +48,10 @@ public class Vehiculos implements IVehiculos {
 	@Override
 	public void borrar(Vehiculo turismo) throws OperationNotSupportedException {
 		if(turismo == null) {
-			throw new NullPointerException("ERROR: No se puede borrar un turismo nulo.");
+			throw new NullPointerException("ERROR: No se puede borrar un vehículo nulo.");
 		}
 		if(!coleccionVehiculos.contains(turismo)) {
-			throw new OperationNotSupportedException("ERROR: No existe ningún turismo con esa matrícula.");
+			throw new OperationNotSupportedException("ERROR: No existe ningún vehículo con esa matrícula.");
 		}
 		coleccionVehiculos.remove(turismo);
 	}
