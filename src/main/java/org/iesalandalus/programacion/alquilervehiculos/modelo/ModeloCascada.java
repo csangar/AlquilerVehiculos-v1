@@ -8,18 +8,22 @@ import javax.naming.OperationNotSupportedException;
 
 import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Alquiler;
 import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Cliente;
+import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Turismo;
 import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Vehiculo;
+import org.iesalandalus.programacion.alquilervehiculos.modelo.negocio.IFuenteDatos;
 import org.iesalandalus.programacion.alquilervehiculos.modelo.negocio.memoria.Vehiculos;
 
 public class ModeloCascada extends Modelo {
-	public ModeloCascada() {
+
+	public ModeloCascada(IFuenteDatos fuenteDatos) {
 		super();
+		setFuenteDatos(fuenteDatos);
 		comenzar();
 	}
 
 	@Override
 	public void insertar(Cliente cliente) throws OperationNotSupportedException {
-		clientes.insertar(cliente);
+		clientes.insertar(new Cliente(cliente));
 	}
 
 	@Override
@@ -32,28 +36,30 @@ public class ModeloCascada extends Modelo {
 		if (alquiler == null) {
 			throw new NullPointerException("ERROR: No se puede realizar un alquiler nulo.");
 		}
-		if (buscar(alquiler.getCliente()) == null) {
+		Cliente cliente = buscar(alquiler.getCliente());
+		if (cliente == null) {
 			throw new OperationNotSupportedException("ERROR: No existe el cliente del alquiler.");
 		}
-		if (buscar(alquiler.getVehiculo()) == null) {
+		Vehiculo vehiculo = buscar(alquiler.getVehiculo());
+		if (vehiculo == null) {
 			throw new OperationNotSupportedException("ERROR: No existe el turismo del alquiler.");
 		}
-		alquileres.insertar(alquiler);
+		alquileres.insertar(new Alquiler(cliente, vehiculo, alquiler.getFechaAlquiler()));
 	}
 
 	@Override
 	public Cliente buscar(Cliente cliente) {
-		return clientes.buscar(cliente);
+		return new Cliente(clientes.buscar(cliente));
 	}
 
 	@Override
 	public Vehiculo buscar(Vehiculo turismo) {
-		return vehiculos.buscar(turismo);
+		return new Turismo((Turismo) vehiculos.buscar(turismo));
 	}
 
 	@Override
 	public Alquiler buscar(Alquiler alquiler) {
-		return alquileres.buscar(alquiler);
+		return new Alquiler(alquileres.buscar(alquiler));
 	}
 
 	@Override
@@ -62,11 +68,12 @@ public class ModeloCascada extends Modelo {
 	}
 
 	@Override
-	public void devolver(Alquiler alquiler, LocalDate fechaDevolucion) throws OperationNotSupportedException {
-		if (alquileres.buscar(alquiler) == null) {
-			throw new OperationNotSupportedException("ERROR: No existe el alquiler a devolver.");
-		}
-		alquiler.devolver(fechaDevolucion);
+	public void devolver(Cliente cliente, LocalDate fechaDevolucion) throws OperationNotSupportedException {
+		alquileres.devolver(cliente, fechaDevolucion);
+	}
+
+	public void devolver(Vehiculo vehiculo, LocalDate fechaDevolucion) throws OperationNotSupportedException {
+		alquileres.devolver(vehiculo, fechaDevolucion);
 	}
 
 	@Override
@@ -79,7 +86,7 @@ public class ModeloCascada extends Modelo {
 
 	@Override
 	public void borrar(Vehiculo turismo) throws OperationNotSupportedException {
-		for(Alquiler alquiler : alquileres.get(turismo)) {
+		for (Alquiler alquiler : alquileres.get(turismo)) {
 			alquileres.borrar(alquiler);
 		}
 		vehiculos.borrar(turismo);
@@ -102,8 +109,8 @@ public class ModeloCascada extends Modelo {
 	@Override
 	public List<Vehiculo> getListaVehiculos() {
 		List<Vehiculo> lista = new ArrayList<>();
-		for (Vehiculo turismo : vehiculos.get()) {
-			lista.add(new Vehiculo(vehiculo));
+		for (Vehiculo vehiculo : vehiculos.get()) {
+			lista.add(Vehiculo.copiar(vehiculo));
 		}
 		return lista;
 	}

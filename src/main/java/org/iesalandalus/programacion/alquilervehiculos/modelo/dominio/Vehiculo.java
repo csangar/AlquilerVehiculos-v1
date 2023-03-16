@@ -15,35 +15,36 @@ public abstract class Vehiculo {
 		setModelo(modelo);
 		setMatricula(matricula);
 	}
-	
+
 	protected Vehiculo(Vehiculo vehiculo) {
 		if (vehiculo == null) {
 			throw new NullPointerException("ERROR: No es posible copiar un vehículo nulo.");
 		}
 		this.marca = vehiculo.getMarca();
-		this.matricula= vehiculo.getMatricula();
-		this.modelo =vehiculo.getModelo();
+		this.matricula = vehiculo.getMatricula();
+		this.modelo = vehiculo.getModelo();
 	}
 
 	public static Vehiculo copiar(Vehiculo vehiculo) {
 		Vehiculo vehiculoCopiado = null;
-		if(vehiculo instanceof Turismo turismo) {
+		if (vehiculo instanceof Turismo turismo) {
 			vehiculoCopiado = new Turismo(turismo);
 		}
-		if(vehiculo instanceof Autobus autobus) {
+		if (vehiculo instanceof Autobus autobus) {
 			vehiculoCopiado = new Autobus(autobus);
 		}
-		if(vehiculo instanceof Furgoneta furgoneta) {
+		if (vehiculo instanceof Furgoneta furgoneta) {
 			vehiculoCopiado = new Furgoneta(furgoneta);
 		}
 		return vehiculoCopiado;
 	}
+
 	public static Vehiculo getVehiculoConMatricula(String matricula) {
 		return new Turismo("Seat", "León", 90, matricula);
 	}
-	
+
 	public abstract int getFactorPrecio();
-	
+
 	public String getMarca() {
 		return marca;
 	}

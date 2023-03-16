@@ -31,8 +31,8 @@ public class Controlador {
 	public void insertar(Cliente cliente) throws OperationNotSupportedException {
 		modelo.insertar(cliente);
 	}
-	public void insertar(Turismo turismo) throws OperationNotSupportedException {
-		modelo.insertar(turismo);
+	public void insertar(Vehiculo vehiculo) throws OperationNotSupportedException {
+		modelo.insertar(vehiculo);
 	}
 	public void insertar(Alquiler alquiler) throws OperationNotSupportedException {
 		modelo.insertar(alquiler);
@@ -40,8 +40,8 @@ public class Controlador {
 	public Cliente buscar(Cliente cliente) {
 		return modelo.buscar(cliente);
 	}
-	public Turismo buscar(Vehiculo turismo) {
-		return modelo.buscar(turismo);
+	public Vehiculo buscar(Vehiculo vehiculo) {
+		return modelo.buscar(vehiculo);
 	}
 	public Alquiler buscar(Alquiler alquiler) {
 	return modelo.buscar(alquiler);	
@@ -49,8 +49,11 @@ public class Controlador {
 	public void modificar(Cliente cliente, String nombre, String telefono) throws OperationNotSupportedException {
 		modelo.modificar(cliente, nombre, telefono);
 	}
-	public void devolver(Alquiler alquiler, LocalDate fechaDevolucion) throws OperationNotSupportedException {
-		modelo.devolver(alquiler, fechaDevolucion);
+	public void devolver(Cliente cliente, LocalDate fechaDevolucion) throws OperationNotSupportedException {
+		modelo.devolver(cliente, fechaDevolucion);
+	}
+	public void devolver(Vehiculo vehiculo, LocalDate fechaDevolucion) throws OperationNotSupportedException {
+		modelo.devolver(vehiculo, fechaDevolucion);
 	}
 	public void borrar(Cliente cliente) throws OperationNotSupportedException {
 		modelo.borrar(cliente);
@@ -62,18 +65,18 @@ public class Controlador {
 		modelo.borrar(alquiler);
 	}
 	public List<Cliente> getClientes() {
-		return modelo.getClientes();
+		return modelo.getListaClientes();
 	}
-	public List<Turismo> getTurismos() {
-		return modelo.getTurismos();
+	public List<Vehiculo> getVehiculos() {
+		return modelo.getListaVehiculos();
 	}
 	public List<Alquiler> getAlquileres(){
-		return modelo.getAlquileres();
+		return modelo.getListaAlquileres();
 	}
 	public List<Alquiler> getAlquileres(Cliente cliente){
-		return modelo.getAlquileres(cliente);
+		return modelo.getListaAlquileres(cliente);
 	}
-	public List<Alquiler> getAlquileres(Vehiculo turismo) {
-		return modelo.getAlquileres(turismo);
+	public List<Alquiler> getAlquileres(Vehiculo vehiculo) {
+		return modelo.getListaAlquileres(vehiculo);
 	}
 }

@@ -1,5 +1,10 @@
 package org.iesalandalus.programacion.alquilervehiculos.modelo.negocio.memoria;
 
+import org.iesalandalus.programacion.alquilervehiculos.modelo.negocio.IAlquileres;
+import org.iesalandalus.programacion.alquilervehiculos.modelo.negocio.IClientes;
+import org.iesalandalus.programacion.alquilervehiculos.modelo.negocio.IFuenteDatos;
+import org.iesalandalus.programacion.alquilervehiculos.modelo.negocio.IVehiculos;
+
 public class FuenteDatosMemoria implements IFuenteDatos {
 
 		@Override
