@@ -28,7 +28,7 @@ public class Alquileres implements IAlquileres {
 	public List<Alquiler> get(Cliente cliente) {
 		List<Alquiler> lista = new ArrayList<>();
 		for (Alquiler alquiler : coleccionAlquileres) {
-			if (cliente == alquiler.getCliente()) {
+			if (cliente.equals(alquiler.getCliente())) {
 				lista.add(alquiler);
 			}
 		}
@@ -39,7 +39,7 @@ public class Alquileres implements IAlquileres {
 	public List<Alquiler> get(Vehiculo turismo) {
 		List<Alquiler> lista = new ArrayList<>();
 		for (Alquiler alquiler : coleccionAlquileres) {
-			if (turismo == alquiler.getVehiculo()) {
+			if (turismo.equals(alquiler.getVehiculo())) {
 				lista.add(alquiler);
 			}
 		}

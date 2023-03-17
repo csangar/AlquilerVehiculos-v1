@@ -10,100 +10,100 @@ public enum Accion {
 		public void ejecutar() {
 			vista.terminar();
 		}
-	}, INSERTAR_CLIENTE("Inserta un cliente") {
+	}, INSERTAR_CLIENTE("Insertar un cliente") {
 		@Override
 		public void ejecutar() throws OperationNotSupportedException {
 			vista.insertarCliente();
 		}
-	}, INSERTAR_VEHICULO("Inserta un vehiculo") {
+	}, INSERTAR_VEHICULO("Insertar un vehiculo") {
 		@Override
 		public void ejecutar() throws OperationNotSupportedException {
 			vista.insertarVehiculo();
 		}
 	},
-	INSERTAR_ALQUILER("Inserta un alquiler") {
+	INSERTAR_ALQUILER("Insertar un alquiler") {
 		@Override
 		public void ejecutar() throws OperationNotSupportedException {
 			vista.insertarAlquiler();
 		}
-	}, BUSCAR_CLIENTE("Busca un cliente") {
+	}, BUSCAR_CLIENTE("Buscar un cliente") {
 		@Override
 		public void ejecutar() {
 			vista.buscarCliente();
 		}
-	}, BUSCAR_VEHICULO("Busca un vehiculo") {
+	}, BUSCAR_VEHICULO("Buscar un vehiculo") {
 		@Override
 		public void ejecutar() {
 			vista.buscarVehiculo();
 		}
 	},
-	BUSCAR_ALQUILER("Busca un alquiler") {
+	BUSCAR_ALQUILER("Buscar un alquiler") {
 		@Override
 		public void ejecutar() {
 			vista.buscarAlquiler();
 		}
-	}, MODIFICAR_CLIENTE("Modifica un cliente") {
+	}, MODIFICAR_CLIENTE("Modificar un cliente") {
 		@Override
 		public void ejecutar() throws OperationNotSupportedException {
 			vista.modificarCliente();
 		}
 	},
-	DEVOLVER_ALQUILER_CLIENTE("Devolve un alquiler") {
+	DEVOLVER_ALQUILER_CLIENTE("Devolver un alquiler de un cliente") {
 		@Override
 		public void ejecutar() throws OperationNotSupportedException {
 			vista.devoverAlquilerCliente();
 		}
-	}, DEVOLVER_ALQUILER_VEHICULO("Devolve un alquiler") {
+	}, DEVOLVER_ALQUILER_VEHICULO("Devolver un alquiler de un vehiculo") {
 		@Override
 		public void ejecutar() throws OperationNotSupportedException {
 			vista.devoverAlquilerVehiculo();
 		}
 	},
-	BORRAR_CLIENTE("Borra un cliente") {
+	BORRAR_CLIENTE("Borrar un cliente") {
 		@Override
 		public void ejecutar() throws OperationNotSupportedException {
 			vista.borrarCliente();
 		}
-	}, BORRAR_VEHICULO("Borra un vehiculo") {
+	}, BORRAR_VEHICULO("Borrar un vehiculo") {
 		@Override
 		public void ejecutar() throws OperationNotSupportedException {
 			vista.borrarVehiculo();
 		}
-	}, BORRAR_ALQUILER("Borra un alquiler") {
+	}, BORRAR_ALQUILER("Borrar un alquiler") {
 		@Override
 		public void ejecutar() throws OperationNotSupportedException {
 			vista.borrarAlquiler();
 		}
 	},
-	LISTAR_CLIENTES("Lista los clientes") {
+	LISTAR_CLIENTES("Listar los clientes") {
 		@Override
 		public void ejecutar() {
 			vista.listarClientes();
 		}
-	}, LISTAR_VEHICULOS("Lista los vehiculos") {
+	}, LISTAR_VEHICULOS("Listar los vehiculos") {
 		@Override
 		public void ejecutar() {
 			vista.listarVehiculos();
 		}
 	},
-	LISTAR_ALQUILERES("Lista los alquileres") {
+	LISTAR_ALQUILERES("Listar los alquileres") {
 		@Override
 		public void ejecutar() {
 			vista.listarAlquiler();
 		}
-	}, LISTAR_ALQUILERES_CLIENTE("Lista los alquileres de un cliente") {
+	}, LISTAR_ALQUILERES_CLIENTE("Listar los alquileres de un cliente") {
 		@Override
 		public void ejecutar() {
 			vista.listarAlquileresCliente();
 		}
 	},
-	LISTAR_ALQUILERES_VEHICULO("Lista los alquileres de un vehiculo") {
+	LISTAR_ALQUILERES_VEHICULO("Listar los alquileres de un vehiculo") {
 		@Override
 		public void ejecutar() {
-			vista.listarAlquileresTurismo();
+			vista.listarAlquileresVehiculo();
 		}
 	},
-	MOSTRAR_ESTADISTICAS_MENSUALES("Muestra las estadisticas mensuales") {
+	MOSTRAR_ESTADISTICAS_MENSUALES("Mostrar las estadisticas mensuales") {
 		@Override
 		public void ejecutar() {
 			vista.mostrarEstadisticasMensualesTipoVehiculo();

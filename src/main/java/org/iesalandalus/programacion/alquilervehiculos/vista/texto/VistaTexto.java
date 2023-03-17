@@ -64,7 +64,6 @@ public class VistaTexto extends Vista {
 			if (turismo == null) {
 				throw new OperationNotSupportedException("El turismo no puede ser nulo");
 			}
-
 			controlador.insertar(new Alquiler(cliente, turismo, alquiler.getFechaAlquiler()));
 			System.out.println("El alquiler se ha insertado de forma correcta");
 		} catch (OperationNotSupportedException | NullPointerException | IllegalArgumentException e) {
@@ -107,7 +106,7 @@ public class VistaTexto extends Vista {
 
 	public void devoverAlquilerCliente() throws OperationNotSupportedException {
 		try {
-			controlador.devolver(Consola.leerAlquiler().getCliente(), Consola.leerFechaDevolucion());
+			controlador.devolver(Consola.leerClienteDni(), Consola.leerFechaDevolucion());
 			System.out.println("El alquiler se ha devuelto de forma correcta");
 		} catch (OperationNotSupportedException | NullPointerException | IllegalArgumentException e) {
 			System.out.println(e.getMessage());
@@ -116,7 +115,7 @@ public class VistaTexto extends Vista {
 
 	public void devoverAlquilerVehiculo() throws OperationNotSupportedException {
 		try {
-			controlador.devolver(Consola.leerAlquiler().getVehiculo(), Consola.leerFechaDevolucion());
+			controlador.devolver(Consola.leerVehiculoMatricula(), Consola.leerFechaDevolucion());
 			System.out.println("El alquiler se ha devuelto de forma correcta");
 		} catch (OperationNotSupportedException | NullPointerException | IllegalArgumentException e) {
 			System.out.println(e.getMessage());
@@ -183,7 +182,7 @@ public class VistaTexto extends Vista {
 		}
 	}
 
-	public void listarAlquileresTurismo() {
+	public void listarAlquileresVehiculo() {
 		try {
 			System.out.println(controlador.getAlquileres(Consola.leerVehiculoMatricula()));
 		} catch (NullPointerException | IllegalArgumentException e) {
@@ -192,7 +191,7 @@ public class VistaTexto extends Vista {
 	}
 
 	public void mostrarEstadisticasMensualesTipoVehiculo() {
-		LocalDate fecha = Consola.leerFechaDevolucion();
+		LocalDate fecha = Consola.leerMes();
 		Map<TipoVehiculo, Integer> mapa = inicializarEstadisticas();
 		for (Alquiler alquiler : controlador.getAlquileres()) {
 			if (alquiler.getFechaAlquiler().getMonth().equals(fecha.getMonth())

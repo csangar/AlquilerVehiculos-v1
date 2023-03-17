@@ -66,10 +66,10 @@ public class Consola {
 		LocalDate fecha = null;
 		try {
 			String cadena = leerCadena(mensaje);
-			if (cadena.equals(PATRON_FECHA)) {
+			if (patron.equals(PATRON_FECHA)) {
 				fecha = LocalDate.parse(cadena, FORMATO_FECHA);
 			}
-			if (cadena.equals(PATRON_MES)) {
+			if (patron.equals(PATRON_MES)) {
 				fecha = LocalDate.parse("01/" + cadena, FORMATO_FECHA);
 			}
 		} catch (Exception e) {
@@ -158,10 +158,10 @@ public class Consola {
 	}
 
 	public static LocalDate leerFechaDevolucion() {
-		return leerFecha("Introoduce la fecha de devolucion: ", PATRON_FECHA);
+		return leerFecha("Introduce la fecha de devolucion: ", PATRON_FECHA);
 	}
 
 	public static LocalDate leerMes() {
-		return leerFecha("Introduce un mes y un año", PATRON_MES);
+		return leerFecha("Introduce un mes y un año: ", PATRON_MES);
 	}
 }
