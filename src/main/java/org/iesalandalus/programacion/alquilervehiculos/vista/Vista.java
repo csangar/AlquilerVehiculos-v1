@@ -8,17 +8,18 @@ public abstract class Vista {
 
 	protected Controlador controlador;
 
+	protected Controlador getControlador() {
+		return controlador;
+	}
+
 	public void setControlador(Controlador controlador) {
 		if (controlador != null) {
 			this.controlador = controlador;
 		}
 	}
-	
-	protected Controlador getControlador() {
-		return controlador;
-	}
-	public abstract void terminar();
 
 	public abstract void comenzar() throws OperationNotSupportedException;
+
+	public abstract void terminar();
 
 }

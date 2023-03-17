@@ -6,7 +6,6 @@ import java.util.TreeMap;
 
 import javax.naming.OperationNotSupportedException;
 
-import org.iesalandalus.programacion.alquilervehiculos.controlador.Controlador;
 import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Alquiler;
 import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Cliente;
 import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Vehiculo;
@@ -14,21 +13,26 @@ import org.iesalandalus.programacion.alquilervehiculos.vista.Vista;
 
 public class VistaTexto extends Vista {
 
-	private Controlador controlador;
-
-	public void setControlador(Controlador controlador) {
-		if (controlador != null) {
-			this.controlador = controlador;
-		}
+	public VistaTexto() {
+		super();
 	}
 
 	public void comenzar() throws OperationNotSupportedException {
-		Consola.mostrarMenuAcciones();
-		Consola.elegirAccion().ejecutar();
+		Accion.setVista(this);
+		Accion accion;
+		do{
+			Consola.mostrarMenuAcciones();
+			accion = Consola.elegirAccion();
+			accion.ejecutar();
+		}while(accion != Accion.SALIR);
 	}
 
 	public void terminar() {
-		System.out.println("FIN");
+		try {
+			System.out.println("FIN");
+		} catch (Exception e) {
+			System.out.print("Error al salir del programa");
+		}
 	}
 
 	public void insertarCliente() throws OperationNotSupportedException {

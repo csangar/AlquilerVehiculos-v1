@@ -126,11 +126,11 @@ public enum Accion {
 		if (!esOrdinalValido(ordinal)) {
 			throw new IllegalArgumentException("El ordinal no es válido");
 		}
-		Accion opcion = null;
+		Accion accion = null;
 		if (esOrdinalValido(ordinal)) {
-			opcion = Accion.values()[ordinal];
+			accion = Accion.values()[ordinal];
 		}
-		return opcion;
+		return accion;
 	}
 
 	private Accion(String cadena) {

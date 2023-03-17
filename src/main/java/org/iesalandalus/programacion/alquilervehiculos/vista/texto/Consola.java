@@ -99,13 +99,6 @@ public class Consola {
 	}
 
 	public static Vehiculo leerVehiculo() {
-		/*
-		 * String marca = leerCadena("Introduce la marca del vehiculo: "); String modelo
-		 * = leerCadena("Introduce el modelo del vehiculo: "); int cilindrada =
-		 * leerEntero("Introduce la cilidrada del vehiculo: "); String matricula =
-		 * leerCadena("Introduce la matricula del vehiculo: "); return new
-		 * Turismo(marca, modelo, cilindrada, matricula);
-		 */
 		mostrarMenuTiposVehiculos();
 		return leerVehiculo(elegirTipoVehiculo());
 	}
@@ -169,6 +162,6 @@ public class Consola {
 	}
 
 	public static LocalDate leerMes() {
-		return Consola.leerFecha("Introduce un mes y un año", PATRON_MES);
+		return leerFecha("Introduce un mes y un año", PATRON_MES);
 	}
 }
