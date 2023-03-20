@@ -1,6 +1,8 @@
 package org.iesalandalus.programacion.alquilervehiculos.vista.texto;
 
 import java.time.LocalDate;
+import java.util.Comparator;
+import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -20,11 +22,11 @@ public class VistaTexto extends Vista {
 	public void comenzar() throws OperationNotSupportedException {
 		Accion.setVista(this);
 		Accion accion;
-		do{
+		do {
 			Consola.mostrarMenuAcciones();
 			accion = Consola.elegirAccion();
 			accion.ejecutar();
-		}while(accion != Accion.SALIR);
+		} while (accion != Accion.SALIR);
 	}
 
 	public void terminar() {
@@ -37,7 +39,7 @@ public class VistaTexto extends Vista {
 
 	public void insertarCliente() throws OperationNotSupportedException {
 		try {
-			controlador.insertar(Consola.leerCliente());
+			getControlador().insertar(Consola.leerCliente());
 			System.out.println("El cliente se ha insertado de forma correcta");
 		} catch (OperationNotSupportedException | NullPointerException | IllegalArgumentException e) {
 			System.out.println(e.getMessage());
@@ -46,7 +48,7 @@ public class VistaTexto extends Vista {
 
 	public void insertarVehiculo() throws OperationNotSupportedException {
 		try {
-			controlador.insertar(Consola.leerVehiculo());
+			super.getControlador().insertar(Consola.leerVehiculo());
 			System.out.println("El turismo se ha insertado de forma correcta");
 		} catch (OperationNotSupportedException | NullPointerException | IllegalArgumentException e) {
 			System.out.println(e.getMessage());
@@ -56,15 +58,15 @@ public class VistaTexto extends Vista {
 	public void insertarAlquiler() throws OperationNotSupportedException {
 		try {
 			Alquiler alquiler = Consola.leerAlquiler();
-			Cliente cliente = controlador.buscar(alquiler.getCliente());
-			Vehiculo turismo = controlador.buscar(alquiler.getVehiculo());
+			Cliente cliente = getControlador().buscar(alquiler.getCliente());
+			Vehiculo turismo = getControlador().buscar(alquiler.getVehiculo());
 			if (cliente == null) {
 				throw new OperationNotSupportedException("El cliente no existe");
 			}
 			if (turismo == null) {
 				throw new OperationNotSupportedException("El turismo no puede ser nulo");
 			}
-			controlador.insertar(new Alquiler(cliente, turismo, alquiler.getFechaAlquiler()));
+			super.getControlador().insertar(new Alquiler(cliente, turismo, alquiler.getFechaAlquiler()));
 			System.out.println("El alquiler se ha insertado de forma correcta");
 		} catch (OperationNotSupportedException | NullPointerException | IllegalArgumentException e) {
 			System.out.println(e.getMessage());
@@ -73,7 +75,7 @@ public class VistaTexto extends Vista {
 
 	public void buscarCliente() {
 		try {
-			System.out.println(controlador.buscar(Consola.leerClienteDni()));
+			System.out.println(getControlador().buscar(Consola.leerClienteDni()));
 		} catch (NullPointerException | IllegalArgumentException e) {
 			System.out.println(e.getMessage());
 		}
@@ -81,7 +83,7 @@ public class VistaTexto extends Vista {
 
 	public void buscarVehiculo() {
 		try {
-			System.out.println(controlador.buscar(Consola.leerVehiculoMatricula()));
+			System.out.println(getControlador().buscar(Consola.leerVehiculoMatricula()));
 		} catch (NullPointerException | IllegalArgumentException e) {
 			System.out.println(e.getMessage());
 		}
@@ -89,7 +91,7 @@ public class VistaTexto extends Vista {
 
 	public void buscarAlquiler() {
 		try {
-			System.out.println(controlador.buscar(Consola.leerAlquiler()));
+			System.out.println(getControlador().buscar(Consola.leerAlquiler()));
 		} catch (NullPointerException | IllegalArgumentException e) {
 			System.out.println(e.getMessage());
 		}
@@ -97,7 +99,7 @@ public class VistaTexto extends Vista {
 
 	public void modificarCliente() throws OperationNotSupportedException {
 		try {
-			controlador.modificar(Consola.leerClienteDni(), Consola.leerNombre(), Consola.leerTelefono());
+			getControlador().modificar(Consola.leerClienteDni(), Consola.leerNombre(), Consola.leerTelefono());
 			System.out.println("El cliente se ha modificado de forma correcta");
 		} catch (OperationNotSupportedException | NullPointerException | IllegalArgumentException e) {
 			System.out.println(e.getMessage());
@@ -106,7 +108,7 @@ public class VistaTexto extends Vista {
 
 	public void devoverAlquilerCliente() throws OperationNotSupportedException {
 		try {
-			controlador.devolver(Consola.leerClienteDni(), Consola.leerFechaDevolucion());
+			getControlador().devolver(Consola.leerClienteDni(), Consola.leerFechaDevolucion());
 			System.out.println("El alquiler se ha devuelto de forma correcta");
 		} catch (OperationNotSupportedException | NullPointerException | IllegalArgumentException e) {
 			System.out.println(e.getMessage());
@@ -115,7 +117,7 @@ public class VistaTexto extends Vista {
 
 	public void devoverAlquilerVehiculo() throws OperationNotSupportedException {
 		try {
-			controlador.devolver(Consola.leerVehiculoMatricula(), Consola.leerFechaDevolucion());
+			getControlador().devolver(Consola.leerVehiculoMatricula(), Consola.leerFechaDevolucion());
 			System.out.println("El alquiler se ha devuelto de forma correcta");
 		} catch (OperationNotSupportedException | NullPointerException | IllegalArgumentException e) {
 			System.out.println(e.getMessage());
@@ -125,7 +127,7 @@ public class VistaTexto extends Vista {
 	public void borrarCliente() throws OperationNotSupportedException {
 		try {
 			Cliente cliente = Consola.leerClienteDni();
-			controlador.borrar(cliente);
+			getControlador().borrar(cliente);
 			System.out.println("El cliente se ha borrado de forma correcta");
 		} catch (OperationNotSupportedException | NullPointerException | IllegalArgumentException e) {
 			System.out.println(e.getMessage());
@@ -134,7 +136,7 @@ public class VistaTexto extends Vista {
 
 	public void borrarVehiculo() throws OperationNotSupportedException {
 		try {
-			controlador.borrar(Consola.leerVehiculoMatricula());
+			getControlador().borrar(Consola.leerVehiculoMatricula());
 			System.out.println("El turismo se ha borrado de forma correcta");
 		} catch (OperationNotSupportedException | NullPointerException | IllegalArgumentException e) {
 			System.out.println(e.getMessage());
@@ -143,7 +145,7 @@ public class VistaTexto extends Vista {
 
 	public void borrarAlquiler() throws OperationNotSupportedException {
 		try {
-			controlador.borrar(Consola.leerAlquiler());
+			getControlador().borrar(Consola.leerAlquiler());
 			System.out.println("El alquiler se ha borrado de forma correcta");
 		} catch (OperationNotSupportedException | NullPointerException | IllegalArgumentException e) {
 			System.out.println(e.getMessage());
@@ -152,7 +154,9 @@ public class VistaTexto extends Vista {
 
 	public void listarClientes() {
 		try {
-			System.out.println(controlador.getClientes());
+			List<Cliente> listaClientes = getControlador().getClientes();
+			listaClientes.sort(Comparator.comparing(Cliente::getNombre).thenComparing(Cliente::getDni));
+			System.out.println(listaClientes);
 		} catch (NullPointerException | IllegalArgumentException e) {
 			System.out.println(e.getMessage());
 		}
@@ -160,7 +164,10 @@ public class VistaTexto extends Vista {
 
 	public void listarVehiculos() {
 		try {
-			System.out.println(controlador.getVehiculos());
+			List<Vehiculo> listaVehiculos = getControlador().getVehiculos();
+			listaVehiculos.sort(Comparator.comparing(Vehiculo::getMarca).thenComparing(Vehiculo::getModelo)
+					.thenComparing(Vehiculo::getMatricula));
+			System.out.println(listaVehiculos);
 		} catch (NullPointerException | IllegalArgumentException e) {
 			System.out.println(e.getMessage());
 		}
@@ -168,7 +175,10 @@ public class VistaTexto extends Vista {
 
 	public void listarAlquiler() {
 		try {
-			System.out.println(controlador.getAlquileres());
+			List<Alquiler> listaAlquileres = getControlador().getAlquileres();
+			Comparator<Cliente> listaClientes = Comparator.comparing(Cliente::getNombre).thenComparing(Cliente::getDni);
+			listaAlquileres.sort(Comparator.comparing(Alquiler::getFechaAlquiler).thenComparing(Alquiler::getCliente,listaClientes));
+			System.out.println(getControlador().getAlquileres());
 		} catch (NullPointerException | IllegalArgumentException e) {
 			System.out.println(e.getMessage());
 		}
@@ -176,7 +186,9 @@ public class VistaTexto extends Vista {
 
 	public void listarAlquileresCliente() {
 		try {
-			System.out.println(controlador.getAlquileres(Consola.leerClienteDni()));
+			List<Alquiler> listaAlquileres = getControlador().getAlquileres(Consola.leerClienteDni());
+			listaAlquileres.sort(Comparator.comparing(Alquiler::getFechaAlquiler));
+			System.out.println(listaAlquileres);
 		} catch (NullPointerException | IllegalArgumentException e) {
 			System.out.println(e.getMessage());
 		}
@@ -184,7 +196,10 @@ public class VistaTexto extends Vista {
 
 	public void listarAlquileresVehiculo() {
 		try {
-			System.out.println(controlador.getAlquileres(Consola.leerVehiculoMatricula()));
+			List<Alquiler> listaAlquileres = getControlador().getAlquileres(Consola.leerVehiculoMatricula());
+			Comparator<Cliente> listaClientes = Comparator.comparing(Cliente::getNombre).thenComparing(Cliente::getDni);
+			listaAlquileres.sort(Comparator.comparing(Alquiler::getFechaAlquiler).thenComparing(Alquiler::getCliente,listaClientes));
+			System.out.println(listaAlquileres);
 		} catch (NullPointerException | IllegalArgumentException e) {
 			System.out.println(e.getMessage());
 		}
@@ -193,7 +208,7 @@ public class VistaTexto extends Vista {
 	public void mostrarEstadisticasMensualesTipoVehiculo() {
 		LocalDate fecha = Consola.leerMes();
 		Map<TipoVehiculo, Integer> mapa = inicializarEstadisticas();
-		for (Alquiler alquiler : controlador.getAlquileres()) {
+		for (Alquiler alquiler : getControlador().getAlquileres()) {
 			if (alquiler.getFechaAlquiler().getMonth().equals(fecha.getMonth())
 					&& alquiler.getFechaAlquiler().getYear() == (fecha.getYear())) {
 				if (TipoVehiculo.get(alquiler.getVehiculo()).equals(TipoVehiculo.TURISMO)) {
